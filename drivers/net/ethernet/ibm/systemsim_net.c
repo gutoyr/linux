@@ -336,7 +336,8 @@ int __init do_systemsim_net_probe(struct net_device *dev)
 		return (-ENODEV);
 	}
 
-	irq = irq_create_mapping(NULL, irq);
+	if (irq)
+		irq = irq_create_mapping(NULL, irq);
 
 	printk(KERN_INFO "%s: irq:%i %2.2x:%2.2x:%2.2x:%2.2x:%2.2x:%2.2x\n", dev->name, irq,
 	       dev->dev_addr[0], dev->dev_addr[1], dev->dev_addr[2],

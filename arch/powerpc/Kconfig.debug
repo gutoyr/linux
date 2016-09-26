@@ -274,10 +274,12 @@ config PPC_EARLY_DEBUG_MEMCONS
 	  kernel BSS and should be safe to select on any system. A debugger
 	  can then be used to read kernel output or send input to the console.
 
-config PPC_EARLY_DEBUG_MAMBO
-	bool "Mambo console"
+config PPC_EARLY_DEBUG_SYSTEMSIM
+	bool "IBM Functional Simulator console"
+	depends on PPC_SYSTEMSIM
 	help
-	  Select this to enable early debugging on mambo
+	  Select this to enable early debugging when running on IBMs Functional
+          Simulator (systemsim).
 
 endchoice
 

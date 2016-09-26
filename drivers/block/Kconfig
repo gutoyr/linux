@@ -384,9 +384,8 @@ config BLK_DEV_RAM_DAX
 	  allocated from highmem (only a problem for highmem systems).
 
 config BLK_DEV_SYSTEMSIM
-	#depends on PPC_SYSTEMSIM
-	depends on PPC
-	tristate "IBM Full System Simulator Bogus Disk Support"
+	tristate "IBM Functional Simulator Bogus Disk Support"
+	depends on PPC_SYSTEMSIM
 	default y
 	help
 	  Provides quick access to disk images in the simulator without

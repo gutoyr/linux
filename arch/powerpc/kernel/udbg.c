@@ -72,7 +72,7 @@ void __init udbg_early_init(void)
 	udbg_init_debug_opal_raw();
 #elif defined(CONFIG_PPC_EARLY_DEBUG_OPAL_HVSI)
 	udbg_init_debug_opal_hvsi();
-#elif defined(CONFIG_PPC_EARLY_DEBUG_MAMBO)
+#elif defined(CONFIG_PPC_EARLY_DEBUG_SYSTEMSIM)
 	udbg_init_mambo();
 #endif
 
@@ -182,7 +182,7 @@ void __init register_early_udbg_console(void)
 console_initcall(register_udbg_console);
 #endif
 
-#ifdef CONFIG_PPC_EARLY_DEBUG_MAMBO
+#ifdef CONFIG_PPC_EARLY_DEBUG_SYSTEMSIM
 static void udbg_fss_real_putc(char c)
 {
 	mambo_write_console(&c);
@@ -205,4 +205,4 @@ void __init udbg_init_mambo(void)
 	udbg_getc = udbg_fss_real_getc;
 	udbg_getc_poll = udbg_fss_real_getc_poll;
 }
-#endif /* PPC_EARLY_DEBUG_MAMBO */
+#endif /* PPC_EARLY_DEBUG_SYSTEMSIM */

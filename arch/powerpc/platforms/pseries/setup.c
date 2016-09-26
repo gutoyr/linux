@@ -450,6 +450,23 @@ static void __init find_and_init_phbs(void)
 	of_pci_check_probe_only();
 }
 
+/*
+ * Detect if we are running on top of the IBM Functional Simulator.
+ * If we are, use the optimized idle loop for that case.
+ */
+static void __init setup_systemsim_idle(void)
+{
+#ifdef CONFIG_SYSTEMSIM_IDLE
+	struct device_node *systemsim_node;
+
+	systemsim_node = of_find_node_by_path("/systemsim");
+	if (systemsim_node) {
+		ppc_md.power_save = systemsim_idle;
+		of_node_put(systemsim_node);
+	}
+#endif
+}
+
 static void __init pSeries_setup_arch(void)
 {
 	set_arch_panic_timeout(10, ARCH_PANIC_TIMEOUT);
@@ -485,6 +502,8 @@ static void __init pSeries_setup_arch(void)
 		/* No special idle routine */
 		ppc_md.enable_pmcs = power4_enable_pmcs;
 	}
+
+	setup_systemsim_idle();
 
 	ppc_md.pcibios_root_bridge_prepare = pseries_root_bridge_prepare;
 }

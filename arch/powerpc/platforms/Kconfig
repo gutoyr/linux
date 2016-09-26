@@ -72,6 +72,27 @@ config PPC_SMP_MUXED_IPI
 	  cpu.	This will enable the generic code to multiplex the 4
 	  messages on to one ipi.
 
+config PPC_SYSTEMSIM
+	bool "IBM Functional Simulator (systemsim) support"
+	depends on PPC_POWERNV || PPC_PSERIES
+	help
+	  Support booting resulting image under IBMs Functional Simulator.
+	  If you enable this option, you are able to select device
+	  drivers (e.g. network and disk) for purely simulated devices
+	  that are provided by systemsim.
+	  The Functional simulator is available for download from
+	  https://www-304.ibm.com/webapp/set2/sas/f/pwrfs/home.html.
+
+config SYSTEMSIM_IDLE
+	bool "   Optimized idle loop for systemsim"
+	depends on PPC_SYSTEMSIM
+	default y
+	help
+	  Selecting this option will enable an more optimized idle loop
+	  for running on the IBM Functional Simulator that significantly
+	  reduces the load on the host system when simulating an idle
+          system.
+
 config IPIC
 	bool
 	default n
